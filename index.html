@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一个网站</title>
+    <style>
+        body {
+            background-color: #f0f0f0;  /* 浅灰色背景 */
+            max-width: 800px;           /* 限制内容宽度 */
+            margin: 20px auto;          /* 页面居中 */
+            padding: 20px;              /* 内容边距 */
+            border: 1px solid black;    /* 黑色边框 */
+        }
+        h1 {
+            color: red;  /* 红色标题 */
+        }
+        p {
+            color: blue;               /* 蓝色文字 */
+            font-family: "Microsoft YaHei", sans-serif;  /* 微软雅黑字体 */
+            font-size: 16px;           /* 字体大小 */
+        }
+        .center-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+        .button-link, .alert-button {
+            display: inline-block;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 10px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);  /* 添加阴影 */
+            transition: all 0.3s ease;  /* 平滑过渡效果 */
+        }
+        .button-link {
+            background-color: #4CAF50;
+        }
+        .alert-button {
+            background-color: #2196F3;
+        }
+        .button-link:hover, .alert-button:hover {
+            transform: translateY(-2px);  /* 悬停时上移 */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);  /* 悬停时阴影加深 */
+        }
+        .button-link:hover {
+            background-color: #45a049;
+        }
+        .alert-button:hover {
+            background-color: #1976D2;
+        }
+        .form-container {
+            margin: 20px 0;
+            padding: 10px;
+        }
+        .input-field {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        #welcome-message {
+            color: #2196F3;
+            margin-top: 10px;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        #greeting {
+            color: #333;
+            font-size: 18px;
+            margin: 20px 0;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        #color-button {
+            background-color: #9C27B0;  /* 紫色按钮 */
+        }
+        #color-button:hover {
+            background-color: #7B1FA2;
+        }
+    </style>
+</head>
+<body>
+    <h1>欢迎来到我的网站</h1>
+    <p id="greeting"></p>
+    <img src="绝世武功目录.png" alt="示例图片" class="center-img">
+    <div style="text-align: center;">
+        <p>这是我的第一个网页！</p>
+        <div class="form-container">
+            <input type="text" id="nameInput" placeholder="请输入姓名" class="input-field">
+            <button onclick="showWelcome()" class="alert-button">提交</button>
+            <p id="welcome-message"></p>
+        </div>
+        <a href="https://www.baidu.com" class="button-link">访问百度</a>
+        <button onclick="alert('你好，世界！')" class="alert-button">点击我</button>
+        <button 
+            onmousedown="startTimer()" 
+            onmouseup="clearTimer()" 
+            ontouchstart="startTimer()" 
+            ontouchend="clearTimer()" 
+            onclick="changeBackgroundColor()" 
+            class="alert-button" 
+            id="color-button">
+            随机背景色
+        </button>
+    </div>
+
+    <script>
+        // 显示问候语
+        function showGreeting() {
+            const hour = new Date().getHours();
+            const greeting = document.getElementById('greeting');
+            if (hour >= 0 && hour < 12) {
+                greeting.textContent = "早上好！欢迎访问我的网站。";
+            } else if (hour >= 12 && hour < 18) {
+                greeting.textContent = "下午好！欢迎访问我的网站。";
+            } else {
+                greeting.textContent = "晚上好！欢迎访问我的网站。";
+            }
+        }
+
+        let pressTimer;
+        const defaultColor = '#f0f0f0';  // 默认背景色
+
+        // 开始计时
+        function startTimer() {
+            pressTimer = setTimeout(() => {
+                document.body.style.backgroundColor = defaultColor;
+                // 添加过渡动画
+                document.body.style.transition = 'background-color 0.5s ease';
+            }, 3000);  // 3秒后执行
+        }
+
+        // 清除计时器
+        function clearTimer() {
+            if (pressTimer) {
+                clearTimeout(pressTimer);
+            }
+        }
+
+        // 修改随机背景色函数
+        function changeBackgroundColor() {
+            const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+            document.body.style.backgroundColor = randomColor;
+            // 添加过渡动画
+            document.body.style.transition = 'background-color 0.5s ease';
+        }
+
+        // 页面加载时显示问候语
+        showGreeting();
+
+        // 原有的欢迎消息函数
+        function showWelcome() {
+            const name = document.getElementById('nameInput').value;
+            if (name.trim() !== '') {
+                document.getElementById('welcome-message').textContent = `欢迎，${name}！`;
+            } else {
+                alert('请输入姓名！');
+            }
+        }
+    </script>
+</body>
+</html> 
